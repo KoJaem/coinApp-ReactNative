@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-export function CoinItem({name, volume, price, rank}: any) {
-  const now = new Date().toLocaleString();
+export function CoinItem({name, volume, price}: any) {
+  // const now = new Date().toLocaleString();
   return (
     <Container>
       <StyleImage source={require('../assets/image/coin_image.jpg')} />
       <StyleText>{name}</StyleText>
       <StyleText>{volume}</StyleText>
       <StyleText>{price}</StyleText>
-      <StyleText>{rank}</StyleText>
+      {/* <StyleText>{rank}</StyleText> */}
     </Container>
   );
 }
