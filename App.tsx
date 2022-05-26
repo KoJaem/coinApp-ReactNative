@@ -1,20 +1,18 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import styled from 'styled-components/native';
+import {CoinView, TopBar} from './components';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <StyledView>
-        <Text>초기설정중</Text>
-      </StyledView>
-    );
-  }
+export default function App() {
+  return (
+    <Container>
+      <TopBar title="Show Me The Coin" />
+      <CoinView />
+    </Container>
+  );
 }
 
-const StyledView = styled.View`
+const Container = styled(SafeAreaView)`
   flex: 1;
-  background-color: #fff;
-  align-items: center;
-  justify-content: center;
+  background-color: #b8f5ff;
 `;
