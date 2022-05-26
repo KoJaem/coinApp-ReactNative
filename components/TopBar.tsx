@@ -21,6 +21,6 @@ const Container = styled.View`
   height: 52px;
   background-color: #94d2ff;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 0 10px;
 `;

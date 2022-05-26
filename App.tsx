@@ -6,7 +6,7 @@ import {CoinView, TopBar} from './components';
 export default function App() {
   return (
     <Container>
-      <TopBar title="Show Me The Coin" />
+      <TopBar title={'Coin Information'} />
       <CoinView />
     </Container>
   );
