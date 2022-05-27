@@ -1,14 +1,18 @@
 import {Text} from 'react-native';
 import React from 'react';
 import styled from 'styled-components/native';
+import {useTimeSelector} from '../hooks/timeHook';
+import {printDate} from '../utils/formatDate';
 
 type Props = {
   title: string;
 };
 
 export function TopBar({title}: Props) {
+  const {time} = useTimeSelector(state => state.timer);
   return (
     <Container>
+      <Text>{printDate(time)}</Text>
       <Text>Left</Text>
       <Text>{title}</Text>
       <Text>Right</Text>

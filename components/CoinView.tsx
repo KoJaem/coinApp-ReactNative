@@ -1,9 +1,17 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {CoinItem} from './CoinItem';
-
+import axios from 'axios';
+import {useTimeDispatch} from '../hooks/timeHook';
+import {refresh} from '../reducer/timerReducer';
+type DataType = {
+  market: string;
+  trade_price: string;
+  trade_volume: string;
+};
 export function CoinView() {
-  const [state, setState] = useState<any>({
+  const dispatch = useTimeDispatch();
+  const [state, setState] = useState({
     coinData: [],
     isLoading: false,
   });
@@ -13,24 +21,19 @@ export function CoinView() {
       ...state,
       isLoading: true,
     });
-
     try {
-      const response = await fetch(
+      const response = await axios.get(
         'https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETC,KRW-MTL,KRW-LTC,KRW-NEO,KRW-XRP,KRW-QTUM',
       );
-      const responseJson = await response.json();
+      dispatch(refresh());
       await setState({
-        coinData: responseJson,
+        coinData: response.data,
         isLoading: false,
       });
     } catch (error) {
       console.error('getCoinData', error);
     }
-  }, [state]);
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+  }, [state, dispatch]);
 
   useEffect(() => {
     getCoinData();
@@ -39,12 +42,12 @@ export function CoinView() {
   return (
     <Container>
       {state.coinData &&
-        state.coinData.map((data: any, index: number) => (
+        state.coinData.map((data: DataType, index) => (
           <CoinItem
             key={index}
             name={data.market}
-            price={data.trade_price}
             volume={data.trade_volume}
+            price={data.trade_price}
           />
         ))}
     </Container>
