@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 type Props = {
   name: string;
@@ -9,6 +10,30 @@ type Props = {
   change: string;
 };
 export function CoinItem({name, volume, price, change}: Props) {
+  const iconInfo = (result: string) => {
+    switch (result) {
+      case 'RISE':
+        return {
+          iconName: 'arrowup',
+          iconColor: '#155e44',
+        };
+      case 'FALL':
+        return {
+          iconName: 'arrowdown',
+          iconColor: 'red',
+        };
+      case 'EVEN':
+        return {
+          iconName: 'minus',
+          iconColor: '#554ad1',
+        };
+      default:
+        return {
+          iconName: '',
+          iconColor: '',
+        };
+    }
+  };
   return (
     <Container>
       <StyleImage source={require('../assets/image/coin_image.jpg')} />
@@ -25,6 +50,13 @@ export function CoinItem({name, volume, price, change}: Props) {
           </Change>
         </ChangeWrapper>
       </InfoWrapper>
+      <IconWrapper>
+        <Icon
+          name={iconInfo(change).iconName}
+          size={24}
+          color={iconInfo(change).iconColor}
+        />
+      </IconWrapper>
     </Container>
   );
 }
@@ -49,20 +81,17 @@ const Name = styled.Text`
   color: black;
   margin: 0 10px;
   font-size: 20px;
-  flex: auto;
 `;
 
 const Volume = styled.Text`
   color: darkgray;
   margin: 0 10px;
-  flex: auto;
   font-size: 16px;
 `;
 
 const Price = styled.Text`
   color: #286578;
   margin: 0 10px;
-  flex: auto;
   font-size: 16px;
 `;
 
@@ -90,4 +119,8 @@ const Change = styled.Text<ChangeProps>`
   font-size: 16px;
   color: ${({change}) =>
     change === 'RISE' ? '#155e44' : change === 'FALL' ? 'red' : '#554ad1'};
+`;
+
+const IconWrapper = styled.View`
+  margin-right: 12px;
 `;
