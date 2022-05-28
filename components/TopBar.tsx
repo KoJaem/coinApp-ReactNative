@@ -11,9 +11,11 @@ export function TopBar({title}: Props) {
   const {time} = useTimeSelector(state => state.timer);
   return (
     <Container>
-      <Text>{time}</Text>
       <Text>Left</Text>
-      <Text>{title}</Text>
+      <Title>
+        <Text>{title}</Text>
+        <Text>{time}</Text>
+      </Title>
       <Text>Right</Text>
     </Container>
   );
@@ -26,4 +28,8 @@ const Container = styled.View`
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
+`;
+
+const Title = styled.View`
+  align-items: center;
 `;

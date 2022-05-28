@@ -23,7 +23,7 @@ export function CoinView() {
     });
     try {
       const response = await axios.get(
-        'https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETC,KRW-MTL,KRW-LTC,KRW-NEO,KRW-XRP,KRW-QTUM',
+        'https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETC,KRW-MTL,KRW-LTC,KRW-NEO,KRW-XRP,KRW-QTUM,KRW-XLM,KRW-STORJ,KRW-SNT',
       );
       dispatch(refresh());
       await setState({
@@ -54,7 +54,7 @@ export function CoinView() {
   );
 }
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   flex: 1;
   flex-direction: column;
   background-color: #96f1ff;
