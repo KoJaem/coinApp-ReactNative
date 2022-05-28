@@ -8,6 +8,7 @@ type DataType = {
   market: string;
   trade_price: string;
   trade_volume: string;
+  change: string;
 };
 export function CoinView() {
   const dispatch = useTimeDispatch();
@@ -48,6 +49,7 @@ export function CoinView() {
             name={data.market}
             volume={data.trade_volume}
             price={data.trade_price}
+            change={data.change}
           />
         ))}
     </Container>
@@ -57,5 +59,4 @@ export function CoinView() {
 const Container = styled.ScrollView`
   flex: 1;
   flex-direction: column;
-  background-color: #96f1ff;
 `;

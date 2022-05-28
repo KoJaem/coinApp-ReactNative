@@ -18,5 +18,5 @@ export default function App() {
 
 const Container = styled(SafeAreaView)`
   flex: 1;
-  background-color: #b8f5ff;
+  background-color: #d5efff;
 `;

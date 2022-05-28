@@ -12,10 +12,10 @@ export function TopBar({title}: Props) {
   return (
     <Container>
       <Text>Left</Text>
-      <Title>
-        <Text>{title}</Text>
-        <Text>{time}</Text>
-      </Title>
+      <TitleWrapper>
+        <Title>{title}</Title>
+        <Time>{time}</Time>
+      </TitleWrapper>
       <Text>Right</Text>
     </Container>
   );
@@ -30,6 +30,16 @@ const Container = styled.View`
   padding: 0 10px;
 `;
 
-const Title = styled.View`
+const TitleWrapper = styled.View`
   align-items: center;
+`;
+
+const Title = styled.Text`
+  font-size: 20px;
+  color: #295881;
+`;
+
+const Time = styled.Text`
+  font-size: 12px;
+  color: #8b31d0;
 `;
