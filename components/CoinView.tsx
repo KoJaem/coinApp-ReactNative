@@ -1,9 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import styled from 'styled-components/native';
+// import styled from 'styled-components/native';
 import {CoinItem} from './CoinItem';
 import axios from 'axios';
 import {useTimeDispatch} from '../hooks/timeHook';
 import {refresh} from '../reducer/timerReducer';
+import {FlatList, ListRenderItem} from 'react-native';
 type DataType = {
   market: string;
   trade_price: string;
@@ -40,23 +41,27 @@ export function CoinView() {
     getCoinData();
   }, []);
 
+  const renderItem: ListRenderItem<DataType> = ({item}) => {
+    return (
+      <CoinItem
+        name={item.market}
+        volume={item.trade_volume}
+        price={item.trade_price}
+        change={item.change}
+      />
+    );
+  };
+
   return (
-    <Container>
-      {state.coinData &&
-        state.coinData.map((data: DataType, index) => (
-          <CoinItem
-            key={index}
-            name={data.market}
-            volume={data.trade_volume}
-            price={data.trade_price}
-            change={data.change}
-          />
-        ))}
-    </Container>
+    <FlatList
+      data={state.coinData}
+      renderItem={renderItem}
+      keyExtractor={(item: DataType) => item.market}
+    />
   );
 }
 
-const Container = styled.ScrollView`
-  flex: 1;
-  flex-direction: column;
-`;
+// const Container = styled.ScrollView`
+//   flex: 1;
+//   flex-direction: column;
+// `;
