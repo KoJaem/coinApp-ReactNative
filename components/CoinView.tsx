@@ -12,35 +12,27 @@ type DataType = {
   trade_volume: number;
   change: string;
 };
-type StateType = {
-  coinData: coinDataType[];
-  isLoading: boolean;
-};
+
 export function CoinView() {
   const dispatch = useTimeDispatch();
-  const [state, setState] = useState<StateType>({
-    coinData: [],
-    isLoading: false,
-  });
+  const [coinData, setCoinData] = useState<coinDataType[]>([]);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [limit, setLimit] = useState(0);
 
   const getCoinData = useCallback(async () => {
-    await setState({
-      ...state,
-      isLoading: true,
-    });
+    // setIsLoading(true);
     try {
       const response = await axios.get(
         `https://api.upbit.com/v1/ticker?markets=${coinDataName.join(',')}`,
       );
       dispatch(refresh());
-      await setState({
-        coinData: response.data,
-        isLoading: false,
-      });
+      setCoinData(coinData.concat(response.data));
+      // setIsLoading(false);
     } catch (error) {
       console.error('getCoinData', error);
     }
-  }, [state, dispatch]);
+  }, [coinData, dispatch]);
 
   useEffect(() => {
     getCoinData();
@@ -59,10 +51,10 @@ export function CoinView() {
 
   return (
     <FlatList
-      data={state.coinData}
+      data={coinData}
       renderItem={renderItem}
       keyExtractor={(item: DataType) => item.market}
-      refreshing={state.isLoading}
+      refreshing={refreshing}
       onRefresh={getCoinData}
     />
   );
