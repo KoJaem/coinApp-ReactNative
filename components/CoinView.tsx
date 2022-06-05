@@ -5,7 +5,7 @@ import axios from 'axios';
 import {useTimeDispatch} from '../hooks/timeHook';
 import {refresh} from '../reducer/timerReducer';
 import {FlatList, ListRenderItem} from 'react-native';
-import {coinDataType} from '../types/coinData.type';
+import {coinDataType, coinDataName} from '../types/coinData.type';
 type DataType = {
   market: string;
   trade_price: number;
@@ -30,7 +30,7 @@ export function CoinView() {
     });
     try {
       const response = await axios.get(
-        'https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETC,KRW-MTL,KRW-LTC,KRW-NEO,KRW-XRP,KRW-QTUM,KRW-XLM,KRW-STORJ,KRW-SNT',
+        `https://api.upbit.com/v1/ticker?markets=${coinDataName.join(',')}`,
       );
       dispatch(refresh());
       await setState({
