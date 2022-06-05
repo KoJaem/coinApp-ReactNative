@@ -5,15 +5,20 @@ import axios from 'axios';
 import {useTimeDispatch} from '../hooks/timeHook';
 import {refresh} from '../reducer/timerReducer';
 import {FlatList, ListRenderItem} from 'react-native';
+import {coinDataType} from '../types/coinData.type';
 type DataType = {
   market: string;
-  trade_price: string;
-  trade_volume: string;
+  trade_price: number;
+  trade_volume: number;
   change: string;
+};
+type StateType = {
+  coinData: coinDataType[];
+  isLoading: boolean;
 };
 export function CoinView() {
   const dispatch = useTimeDispatch();
-  const [state, setState] = useState({
+  const [state, setState] = useState<StateType>({
     coinData: [],
     isLoading: false,
   });
@@ -57,6 +62,8 @@ export function CoinView() {
       data={state.coinData}
       renderItem={renderItem}
       keyExtractor={(item: DataType) => item.market}
+      refreshing={state.isLoading}
+      onRefresh={getCoinData}
     />
   );
 }

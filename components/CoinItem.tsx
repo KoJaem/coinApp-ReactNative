@@ -5,8 +5,8 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 type Props = {
   name: string;
-  volume: string;
-  price: string;
+  volume: number;
+  price: number;
   change: string;
 };
 export function CoinItem({name, volume, price, change}: Props) {
