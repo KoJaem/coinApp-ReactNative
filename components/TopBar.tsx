@@ -2,6 +2,7 @@ import {Text} from 'react-native';
 import React from 'react';
 import styled from 'styled-components/native';
 import {useTimeSelector} from '../hooks/timeHook';
+import {useNavigation} from '@react-navigation/native';
 
 type Props = {
   title: string;
@@ -9,9 +10,15 @@ type Props = {
 
 export function TopBar({title}: Props) {
   const {time} = useTimeSelector(state => state.timer);
+  const navigation = useNavigation();
   return (
     <Container>
-      <Text>Left</Text>
+      <Text
+        onPress={() => {
+          navigation.goBack();
+        }}>
+        Left
+      </Text>
       <TitleWrapper>
         <Title>{title}</Title>
         <Time>{time}</Time>
