@@ -1,6 +1,6 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
-import {Button} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {StackParamList} from '../App';
 const technology = [
@@ -23,13 +23,13 @@ export function MainView({navigation}: Props) {
             <Technology key={index}>- {data}</Technology>
           ))}
         </TechnologyWrapper>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Coin');
+          }}>
+          <LinkText>코인 정보 보러가기</LinkText>
+        </TouchableOpacity>
       </Wrapper>
-      <Button
-        title="코인 정보 보러가기"
-        onPress={() => {
-          navigation.navigate('Coin');
-        }}
-      />
     </Container>
   );
 }
@@ -65,4 +65,11 @@ const TechnologyWrapper = styled.View`
 const Technology = styled.Text`
   color: #11a08d;
   font-size: 14px;
+`;
+
+const LinkText = styled.Text`
+  font-size: 16px;
+  color: #456ceb;
+  text-decoration: underline;
+  text-decoration-color: #456ceb;
 `;
