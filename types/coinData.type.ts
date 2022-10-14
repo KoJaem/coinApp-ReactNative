@@ -31,7 +31,6 @@ export const coinDataName = [
   'KRW-BTC',
   'KRW-ETH',
   'BTC-ETH',
-  'BTC-LTC',
   'BTC-XRP',
   'BTC-ETC',
   'BTC-OMG',
@@ -57,12 +56,10 @@ export const coinDataName = [
   'BTC-RLC',
   'USDT-BTC',
   'USDT-ETH',
-  'USDT-LTC',
   'USDT-XRP',
   'USDT-ETC',
   'KRW-NEO',
   'KRW-MTL',
-  'KRW-LTC',
   'KRW-XRP',
   'KRW-ETC',
   'KRW-OMG',
@@ -317,4 +314,23 @@ export const coinDataName = [
   'KRW-GMT',
   'BTC-GMT',
   'BTC-APE',
+  'BTC-RAY',
 ];
+
+// const getCoinName = async () => {
+//   try {
+//     const {data} = await axios.get(
+//       `https://api.upbit.com/v1/market/all?isDetails=false`,
+//     );
+//     // response.map(data => {
+//     //   console.log(data.market);
+//     // });
+//     data.map(data => {
+//       console.log(`"${data.market}",`);
+//     });
+//     // setIsLoading(false);
+//   } catch (error) {
+//     console.error('getCoinData', error);
+//   }
+// };
+// getCoinName();
